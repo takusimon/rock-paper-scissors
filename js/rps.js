@@ -5,7 +5,7 @@ function getRandomInt(){
 }
 
 function getComputerChoice(){
-    //Call getRandomInt use value to pick on of either "rock","paper"or "scissors"
+    //CALL getRandomInt use value to pick on of either "rock","paper"or "scissors"
     let randomInt = getRandomInt();
 
     switch(randomInt) {
@@ -18,4 +18,10 @@ function getComputerChoice(){
     }
 }
 
+function getHumanChoice(){
+    //OBTAIN user choice, return to calling function
+    return prompt("Rock,Paper or Scissors?").toLowerCase();
+
+}
 console.log(getComputerChoice());
+console.log(getHumanChoice());
