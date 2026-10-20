@@ -19,7 +19,10 @@ function getComputerChoice(){
 }
 
 let buttonChoices = document.querySelector("#button-choices");
-let gameScore = document.querySelector("#score");
+let scoreBoard = document.querySelector("#score");
+let roundOutcome = document.createElement('h2');
+let roundDetails = document.createElement('p');
+let gameScore = document.createElement('h3');
 
 buttonChoices.addEventListener('click',(event) => {
     let target = event.target;
@@ -43,11 +46,15 @@ buttonChoices.addEventListener('click',(event) => {
 
 function checkScore(){
     if (humanScore === 5){
-        gameScore.textContent = `You Won! ${humanScore} to ${computerScore}`;
+        roundOutcome.textContent = `You Won! ${humanScore} to ${computerScore}`;
+        scoreBoard.replaceChildren();
+        scoreBoard.appendChild(roundOutcome);
         humanScore = 0;
         computerScore = 0;
     } else if (computerScore === 5){
-        gameScore.textContent = `You Lost! ${computerScore} to ${humanScore}`;
+        roundOutcome.textContent = `You Lost! ${computerScore} to ${humanScore}`;
+        scoreBoard.replaceChildren();
+        scoreBoard.appendChild(roundOutcome);
         humanScore = 0;
         computerScore = 0;
     }
@@ -55,14 +62,24 @@ function checkScore(){
 
 function updateScoreBoard(outcome,currentHumanScore,currentComputerScore,currentHumanChoice,currentComputerChoice){
     if (outcome === true){
-        gameScore.textContent = `YOU WIN THIS ROUND!\n ${currentHumanChoice}
-        beats ${currentComputerChoice}\n
-        Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+        scoreBoard.replaceChildren();
+        roundOutcome.textContent = `YOU WIN THIS ROUND!`;
+        roundDetails.textContent = `${currentHumanChoice} beats ${currentComputerChoice}`
+        gameScore.textContent = `Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+        scoreBoard.append(roundOutcome,roundDetails, gameScore);
     } else if (outcome === 'draw'){
-        gameScore.textContent = `ITS A DRAW!\n both chose ${currentHumanChoice} Score You:${currentHumanScore} Computer:${currentComputerScore}`
+         scoreBoard.replaceChildren();
+        roundOutcome.textContent = `DRAW!`;
+        roundDetails.textContent = `Your Choice of ${currentHumanChoice} is
+        the same as the computers choice of ${currentComputerChoice}`
+        gameScore.textContent = `Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+        scoreBoard.append(roundOutcome,roundDetails, gameScore);
     } else {
-        gameScore.textContent = `YOU LOSE THIS ROUND!\n ${currentComputerChoice} beats ${currentHumanChoice}\n
-        Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+         scoreBoard.replaceChildren();
+        roundOutcome.textContent = `YOU LOSE THIS ROUND!`;
+        roundDetails.textContent = `${currentComputerChoice} beats ${currentHumanChoice}`
+        gameScore.textContent = `Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+        scoreBoard.append(roundOutcome,roundDetails, gameScore);
     }
 
 }
