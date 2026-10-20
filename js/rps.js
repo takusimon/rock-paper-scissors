@@ -18,18 +18,43 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    //OBTAIN user choice, return to calling function
-    return prompt("Rock,Paper or Scissors?").toLowerCase();
+let buttonChoices = document.querySelector("#button-choices");
 
+buttonChoices.addEventListener('click',(event) => {
+    let target = event.target;
+
+    switch(target.id) {
+        case 'rock':
+            playRound('rock',getComputerChoice());
+            checkScore();
+            break;
+        case 'paper':
+            playRound('paper',getComputerChoice());
+            checkScore();
+            break;
+        case 'scissors':
+            playRound('scissors',getComputerChoice());
+            checkScore();
+            break;
+
+    }
+})
+
+function checkScore(){
+    if (humanScore === 5){
+        console.log(`You Won! ${humanScore} to ${computerScore}`);
+        humanScore = 0;
+        computerScore = 0;
+    } else if (computerScore === 5){
+        console.log(`You Lost! ${computerScore} to ${humanScore}`);
+        humanScore = 0;
+        computerScore = 0;
+    }
 }
-
-
-function playGame(){
-    //Play 5 rounds
     let humanScore = 0,
     computerScore = 0;
-    function playRound(humanChoice,computerChoice) {
+
+function playRound(humanChoice,computerChoice) {
     // Get humanChoice and computerChoice, determine who wins, output outcome and current score.
     if (humanChoice == "rock" && computerChoice == "scissors"){
         ++humanScore;
@@ -47,12 +72,5 @@ function playGame(){
         return console.log(`You lose! ${computerChoice} beats ${humanChoice}.\n` + `Score You:${humanScore} Computer:${computerScore}`);}
 }
 
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
-    
-}
 
-playGame();
+
