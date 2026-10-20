@@ -19,6 +19,7 @@ function getComputerChoice(){
 }
 
 let buttonChoices = document.querySelector("#button-choices");
+let gameScore = document.querySelector("#score");
 
 buttonChoices.addEventListener('click',(event) => {
     let target = event.target;
@@ -42,14 +43,28 @@ buttonChoices.addEventListener('click',(event) => {
 
 function checkScore(){
     if (humanScore === 5){
-        console.log(`You Won! ${humanScore} to ${computerScore}`);
+        gameScore.textContent = `You Won! ${humanScore} to ${computerScore}`;
         humanScore = 0;
         computerScore = 0;
     } else if (computerScore === 5){
-        console.log(`You Lost! ${computerScore} to ${humanScore}`);
+        gameScore.textContent = `You Lost! ${computerScore} to ${humanScore}`;
         humanScore = 0;
         computerScore = 0;
     }
+}
+
+function updateScoreBoard(outcome,currentHumanScore,currentComputerScore,currentHumanChoice,currentComputerChoice){
+    if (outcome === true){
+        gameScore.textContent = `YOU WIN THIS ROUND!\n ${currentHumanChoice}
+        beats ${currentComputerChoice}\n
+        Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+    } else if (outcome === 'draw'){
+        gameScore.textContent = `ITS A DRAW!\n both chose ${currentHumanChoice} Score You:${currentHumanScore} Computer:${currentComputerScore}`
+    } else {
+        gameScore.textContent = `YOU LOSE THIS ROUND!\n ${currentComputerChoice} beats ${currentHumanChoice}\n
+        Score You:${currentHumanScore} Computer:${currentComputerScore}`;
+    }
+
 }
     let humanScore = 0,
     computerScore = 0;
@@ -58,18 +73,18 @@ function playRound(humanChoice,computerChoice) {
     // Get humanChoice and computerChoice, determine who wins, output outcome and current score.
     if (humanChoice == "rock" && computerChoice == "scissors"){
         ++humanScore;
-        return console.log("You win! Rock beats Scissors.\n" + `Score You:${humanScore} Computer:${computerScore}`);
+        updateScoreBoard(true,humanScore,computerScore,humanChoice,computerChoice);
     } else if (humanChoice == "paper" && computerChoice == "rock"){
          ++humanScore;
-        return console.log("You win! Paper beats Rock.\n" + `Score You:${humanScore} Computer:${computerScore}`);
+        updateScoreBoard(true,humanScore,computerScore,humanChoice,computerChoice);
     } else if (humanChoice == 'scissors' && computerChoice == "paper"){
          ++humanScore;
-        return console.log("You win! Scissors beats Paper.\n" + `Score You:${humanScore} Computer:${computerScore}`);
+        updateScoreBoard(true,humanScore,computerScore,humanChoice,computerChoice);
     } else if (humanChoice === computerChoice){
-        return console.log(`Draw! both choices are the same!`);
+        updateScoreBoard("draw",humanScore,computerScore,humanChoice,computerChoice);
     }else {
         ++computerScore;
-        return console.log(`You lose! ${computerChoice} beats ${humanChoice}.\n` + `Score You:${humanScore} Computer:${computerScore}`);}
+        updateScoreBoard(false,humanScore,computerScore,humanChoice,computerChoice);}
 }
 
 
