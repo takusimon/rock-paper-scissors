@@ -24,8 +24,13 @@ div#score {
     justify-content: center;
     align-items: center;
 }
-
-
+h2,h3,p {
+    text-align: center;
+}
+h2 {
+    font-size: 30px;
+    
+}
 
 #button-choices {
     display: flex;
