@@ -1,4 +1,5 @@
 body {
+    font-family: 'JetBrains Mono Nerd Font Mono', sans-serif, 'Times New Roman', Times, serif;
     background-color: black;
     display: flex;
     flex-flow: column wrap;
@@ -6,12 +7,34 @@ body {
     align-items: center;
     gap: 4em;
 }
+h1 {
+    color:gold;
+    font-size: 50px;
+    margin-bottom: 0px;
+}
 div#score {
     flex: 1 1 auto;
     border:2px solid gold;
     height: 400px;
     width: 400px;
     background-color: white;
-    margin-top:3em;
     border-radius: 2em;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#button-choices {
+    display: flex;
+    gap:2em;
+}
+button {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    border:2px solid white;
+    background-color: goldenrod;
 }
